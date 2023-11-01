@@ -1,0 +1,68 @@
+tasks = []
+
+def add_task():
+    description = input("Enter Task: ")
+    due_date = input("Enter due date: ")
+    priority = input("Enter priority: ")
+    task = {"description": description, "due_date": due_date, "priority": priority, "completed": False}
+    tasks.append(task)
+    print("Task added successfully.")
+
+def display_tasks():
+    for index, task in enumerate(tasks):
+        status = "Completed" if task["completed"] else "Pending"
+        print(f"{index + 1}. Description: {task['description']}, Due Date: {task['due_date']}, Priority: {task['priority']}, Status: {status}")
+
+def mark_completed():
+    display_tasks()
+    task_index = int(input("Enter the task number to mark as completed: ")) - 1
+    if 0 <= task_index < len(tasks):
+        tasks[task_index]["completed"] = True
+        print("Task marked as completed.")
+    else:
+        print("Invalid task number.")
+
+def update_task():
+    display_tasks()
+    task_index = int(input("Enter the task number to update: ")) - 1
+    if 0 <= task_index < len(tasks):
+        description = input("Enter new task description: ")
+        due_date = input("Enter new due date: ")
+        priority = input("Enter new priority: ")
+        tasks[task_index]["description"] = description
+        tasks[task_index]["due_date"] = due_date
+        tasks[task_index]["priority"] = priority
+        print("Task updated successfully.")
+    else:
+        print("Invalid task number.")
+
+def remove_task():
+    display_tasks()
+    task_index = int(input("Enter the task number to remove: ")) - 1
+    if 0 <= task_index < len(tasks):
+        removed_task = tasks.pop(task_index)
+        print(f"Task '{removed_task['description']}' removed.")
+    else:
+        print("Invalid task number.")
+
+while True:
+    print("\nTo-Do List Application")
+    print("1. Add Task")
+    print("2. Display Tasks")
+    print("3. Mark Task as Completed")
+    print("4. Update Task")
+    print("5. Remove Task")
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_task()
+    elif choice == "2":
+        display_tasks()
+    elif choice == "3":
+        mark_completed()
+    elif choice == "4":
+        update_task()
+    elif choice == "5":
+        remove_task()
+    else:
+        print("Invalid choice. Please try again.")
